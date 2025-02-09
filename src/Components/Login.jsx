@@ -16,8 +16,12 @@ const Login = () => {
         if (user) navigate("/home");
     }, [user, navigate]);
 
-     // Dynamic redirect URL
-    const redirectUrl = `${window.location.origin}/home`;
+    // ✅ Dynamically set redirect URL based on environment
+    const redirectUrl = import.meta.env.MODE === "production"
+        ? "https://your-netlify-app.netlify.app/home" // 🔴 Replace with your Netlify URL
+        : "http://localhost:3000/home";
+
+    console.log("Redirecting to:", redirectUrl); // Debugging
 
     return (
         <div className="container-center">
@@ -36,8 +40,8 @@ const Login = () => {
                         },
                         style: {
                             button: {
-                                backgroundColor: darkMode ? "#d3ede2" : "#d3ede2", // ✅ Custom button color
-                                color: darkMode ? "#000" : "#000", // ✅ Text color
+                                backgroundColor: darkMode ? "#d3ede2" : "#d3ede2", 
+                                color: "#000",
                                 border: "none",
                                 borderRadius: "20px",
                                 padding: "10px 15px",
@@ -46,12 +50,12 @@ const Login = () => {
                                 cursor: "pointer"
                             },
                             button_hover: {
-                                backgroundColor: darkMode ? "#c0b06b" : "#0056b3" // ✅ Hover effect
+                                backgroundColor: darkMode ? "#c0b06b" : "#0056b3"
                             }
                         }
                     }}
                     socialLayout="vertical"
-                    redirectTo={redirectUrl}
+                    redirectTo={redirectUrl} // ✅ Dynamic redirect URL
                 />
             </Card>
         </div>
