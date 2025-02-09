@@ -3,14 +3,14 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://tenzin333.github.io/Piinterest",
+  "homepage": "https://tenzin333.github.io/Piinterest/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@supabase/auth-ui-react": "^0.4.7",
@@ -19,6 +19,7 @@
     "react": "^19.0.0",
     "react-bootstrap": "^2.10.9",
     "react-dom": "^19.0.0",
+    "react-loading-skeleton": "^3.5.0",
     "react-router-dom": "^7.1.5"
   },
   "devDependencies": {
