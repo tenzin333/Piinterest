@@ -16,6 +16,9 @@ const Login = () => {
         if (user) navigate("/home");
     }, [user, navigate]);
 
+     // Dynamic redirect URL
+    const redirectUrl = `${window.location.origin}/home`;
+
     return (
         <div className="container-center">
             <Card className="center-card">
@@ -48,7 +51,7 @@ const Login = () => {
                         }
                     }}
                     socialLayout="vertical"
-                    redirectTo="http://localhost:5173/home"
+                    redirectTo={redirectUrl}
                 />
             </Card>
         </div>
