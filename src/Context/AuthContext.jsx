@@ -1,7 +1,10 @@
+```
 import React, { createContext, useContext, useEffect, useState } from "react";
 import Services from "../Services/ServiceHandler";
 import { supabase } from "../Services/ServiceHandler"; // adjust the import path as needed,
 import {  useNavigate } from "react-router-dom";
+import DOMPurify from 'dompurify';
+import crypto from 'crypto';
 
 const AuthContext = createContext();
 
@@ -12,13 +15,17 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [userProfile, setUserProfile] = useState(null);
   const navigate = useNavigate();
-
+  
   useEffect(() => {
     // Get the initial session (if it exists)
     const getInitialSession = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      setSession(session);
-      setLoading(false);
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        setSession(session);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching initial session", error);
+      }
     };
 
     getInitialSession();
@@ -34,16 +41,20 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const handleLogout = async () => {
-    const { error } = await supabase.auth.signOut();
-    
-    if (!error) {
-      navigate("/login"); // Redirect to login page
-    } else {
-      console.error("Logout Error:", error.message);
+    try {
+      const { error } = await supabase.auth.signOut();
+      
+      if (!error) {
+        navigate("/login"); // Redirect to login page
+      } else {
+        console.error("Logout Error:", error.message);
+      }
+    } catch (error) {
+      console.error("Error logging out", error);
     }
   };
 
-
+  
   // Fetch user profile after session is set
   useEffect(() => {
     if (session?.user) {
@@ -52,37 +63,38 @@ export const AuthProvider = ({ children }) => {
   }, [session]); // Triggered when session changes
 
   const getProfiles = async () => {
-    if(!session) return;
+    if (!session) return;
     try {
       const data = await Services.get("profiles", { user_id: session.user.id });
       let res = data[0];
-      if(res.length>0){
+      if (res.length > 0) {
         const temp = {
-          bio: res.bio,
+          bio: DOMPurify.sanitize(res.bio),
           email: res.email,
           name: res.display_name,
           avatar_url: res.avatar_url,
           avatarFile: null,
-          user_id:res.user_id,
+          user_id: res.user_id,
           id: res.id
         };
-    
+        
         setUserProfile(temp);
       }
-    
+      
     } catch (error) {
       console.log("data33 error", error);
     }
   };
 
- 
+  
   const user = session?.user || null;
   const profile = userProfile || null;
 
-
+  
   return (
     <AuthContext.Provider value={{session,user,profile,handleLogout}}>
       {loading ? <div>Loading...</div> : children}
     </AuthContext.Provider>
   );
 };
+```
