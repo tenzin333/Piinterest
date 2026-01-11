@@ -1,3 +1,18 @@
-node_modules
-.env
-dist
+```
+const env = require('dotenv').config({ path: './config/.env' });
+
+const express = require('express');
+const app = express();
+
+app.get('/', (req, res) => {
+  // ...
+});
+
+// Use a package manager to ensure consistent dependency versions
+const packageLock = require('./package-lock.json');
+
+// Regularly audit and update dependencies
+npm.update( () => {
+  // ...
+});
+```
