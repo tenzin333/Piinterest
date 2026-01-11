@@ -1,10 +1,10 @@
+```
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { supabase } from "../Services/ServiceHandler";
 import { useAuth } from "../Context/AuthContext";
-import { Card } from "react-bootstrap";
 import { useTheme } from "../Context/ThemeContext";
 
 const Login = () => {
@@ -16,10 +16,9 @@ const Login = () => {
         if (user) navigate("/home");
     }, [user, navigate]);
 
-    // ✅ Dynamically set redirect URL based on environment
     const redirectUrl = import.meta.env.MODE === "production"
-        ? "https://your-netlify-app.netlify.app/home" // 🔴 Replace with your Netlify URL
-        : "http://localhost:3000/home";
+        ? process.env.REACT_APP_REDIRECT_URL // 🔴 Replace with your Netlify URL
+        : "/home";
 
     console.log("Redirecting to:", redirectUrl); // Debugging
 
@@ -63,3 +62,4 @@ const Login = () => {
 };
 
 export default Login;
+```
