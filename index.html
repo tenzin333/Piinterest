@@ -5,9 +5,37 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Piinterest</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self';">
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <script type="module" src="/src/main.js"></script>
   </body>
 </html>
+
+<script>
+function main() {
+  // Implement input validation and sanitization for user-input
+  const userInput = prompt("Enter your name:");
+  if (userInput.includes("<script>") || userInput.includes(">")) {
+    alert("Invalid input!");
+    return;
+  }
+  
+  // Use HTTPS for secure communication
+  fetch('https://example.com/api', { 
+    method: 'GET',
+    headers: { 
+      'Accept': 'application/json'
+    },
+  }).then(response => response.json())
+  .then(data => {
+    console.log(data);
+  })
+  .catch(error => {
+    console.error(error);
+  });
+}
+
+main();
+</script>
