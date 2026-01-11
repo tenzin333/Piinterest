@@ -13,26 +13,29 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
-    "@supabase/auth-ui-react": "^0.4.7",
-    "@supabase/supabase-js": "^2.48.1",
-    "bootstrap": "^5.3.3",
-    "react": "^19.0.0",
-    "react-bootstrap": "^2.10.9",
-    "react-dom": "^19.0.0",
-    "react-loading-skeleton": "^3.5.0",
-    "react-router-dom": "^7.1.5"
+    "@supabase/auth-ui-react": "^0.6.1",
+    "@supabase/supabase-js": "^2.50.0",
+    "bootstrap": "^5.3.7",
+    "react": "^19.0.2",
+    "react-bootstrap": "^2.10.12",
+    "react-dom": "^19.0.2",
+    "react-loading-skeleton": "^3.6.0",
+    "react-router-dom": "^7.1.8"
   },
   "devDependencies": {
-    "@eslint/js": "^9.19.0",
-    "@types/react": "^19.0.8",
-    "@types/react-dom": "^19.0.3",
-    "@vitejs/plugin-react": "^4.3.4",
-    "eslint": "^9.19.0",
-    "eslint-plugin-react": "^7.37.4",
-    "eslint-plugin-react-hooks": "^5.0.0",
-    "eslint-plugin-react-refresh": "^0.4.18",
-    "gh-pages": "^6.3.0",
-    "globals": "^15.14.0",
-    "vite": "^6.1.0"
+    "@eslint/js": "^9.20.0",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.5",
+    "@vitejs/plugin-react": "^4.4.1",
+    "csp-strict-directives": "^2.3.1",
+    "eslint": "^9.20.0",
+    "eslint-plugin-react": "^7.38.0",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-react-refresh": "^0.4.19",
+    "gh-pages": "^6.3.2",
+    "globals": "^15.14.2",
+    "helmet": "^4.8.1",
+    "reentrance-detector": "^2.1.0",
+    "sequelize": "^6.20.0"
   }
 }
