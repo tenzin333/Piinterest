@@ -1,3 +1,4 @@
+```
 import React, { useState } from "react";
 import { Container, Card } from "react-bootstrap";
 import uploadFile from "../assets/Icons/file-upload.svg";
@@ -31,21 +32,21 @@ const CreatePage = () => {
                 visibility: formData.visibility
             };
 
-            const res = await Services.upsert("images", data, ["user_id", "image_url"]);
+            const query = `INSERT INTO images SET ?`;
+            await Services.executeQuery(query, [data]);
+
             alert("Saved");
         } catch (error) {
             alert(error);
             console.log(error);
         }
-
-
     };
 
     const generateImgUrl = async () => {
         let bucket = formData.visibility === "public" ? "public_images" : "private_images";
         let url;
         let path;
-   
+
         if (bucket === "public_images") {
             path = `images/${Date.now()}_${localImgData.imageFile.name}`;
             await Services.uploadImage(bucket, localImgData.imageFile, path, true);
@@ -148,3 +149,4 @@ const CreatePage = () => {
 };
 
 export default CreatePage;
+```
